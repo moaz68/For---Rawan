@@ -1,0 +1,330 @@
+/* style.css */
+:root {
+    --bg-color: #faf9f6; /* Off-white elegant background */
+    --card-bg: rgba(255, 255, 255, 0.95); /* White cards with slight transparency */
+    --accent-gold: #c29b62; /* Soft elegant gold */
+    --text-main: #4a4a4a; /* Dark grey for readability */
+    --text-muted: #737373; /* Muted grey for paragraphs */
+    --font-heading: 'Reem Kufi', sans-serif;
+    --font-body: 'Cairo', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    overflow-x: hidden; /* يمنع ظهور شريط التمرير الأفقي عند هروب الزر */
+    position: relative;
+    scroll-behavior: smooth;
+}
+
+h1, h2, h3, .date, .title, .subtitle {
+    font-family: var(--font-heading);
+}
+
+/* Floating Hearts Animations */
+#hearts-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.heart {
+    position: absolute;
+    bottom: -10vh;
+    animation: floatUp linear forwards;
+    opacity: 0.8; /* خليتها أوضح */
+    text-shadow: 0 0 15px rgba(255, 182, 193, 0.8); /* توهج أوضح */
+    z-index: 0;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0) scale(0.8) rotate(-15deg); opacity: 0; }
+    20% { opacity: 0.9; }
+    50% { transform: translateY(-60vh) scale(1.2) rotate(15deg); }
+    100% { transform: translateY(-120vh) scale(1) rotate(-15deg); opacity: 0; }
+}
+
+/* 1. Hero Section */
+.hero {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-content {
+    padding: 2rem;
+}
+
+.title {
+    font-size: 3.5rem;
+    color: var(--accent-gold);
+    margin-bottom: 1rem;
+    text-shadow: 0 4px 15px rgba(194, 155, 98, 0.2);
+}
+
+.subtitle {
+    font-size: 2.2rem;
+    margin-bottom: 3rem;
+    color: var(--text-main);
+    letter-spacing: 2px;
+}
+
+.scroll-btn {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    color: #ffffff;
+    background-color: var(--accent-gold);
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    box-shadow: 0 5px 15px rgba(194, 155, 98, 0.3);
+    transition: all 0.3s ease;
+}
+
+.scroll-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(194, 155, 98, 0.5);
+}
+
+/* 2. Timeline Section */
+.timeline-section {
+    padding: 6rem 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.8rem;
+    color: var(--accent-gold);
+    margin-bottom: 5rem;
+    text-shadow: 0 2px 10px rgba(194, 155, 98, 0.1);
+}
+
+.timeline {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* الخط العمودي المركزي */
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    background-color: var(--accent-gold);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+    box-shadow: 0 0 10px rgba(194, 155, 98, 0.3);
+}
+
+.timeline-item {
+    padding: 15px 40px;
+    position: relative;
+    width: 50%;
+}
+
+.timeline-item.left { left: 0; }
+.timeline-item.right { left: 50%; }
+
+/* الدوائر الذهبية على الخط */
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: var(--bg-color);
+    border: 4px solid var(--accent-gold);
+    top: 30px;
+    border-radius: 50%;
+    z-index: 1;
+    box-shadow: 0 0 10px rgba(194, 155, 98, 0.4);
+}
+
+.timeline-item.left::after { right: -10px; }
+.timeline-item.right::after { left: -10px; }
+
+/* بطاقات الكروت */
+.timeline-content {
+    padding: 30px;
+    background-color: var(--card-bg);
+    border: 1px solid rgba(194, 155, 98, 0.15);
+    backdrop-filter: blur(10px); /* Glassmorphism Effect */
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.timeline-item.left .timeline-content { border-right: 4px solid var(--accent-gold); }
+.timeline-item.right .timeline-content { border-left: 4px solid var(--accent-gold); }
+
+.timeline-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-content .date {
+    display: block;
+    color: var(--accent-gold);
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+}
+
+.timeline-content p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+}
+
+/* صور التايم لاين */
+.timeline-img {
+    width: 100%;
+    max-height: 350px;
+    object-fit: cover;
+    margin-top: 20px;
+    border-radius: 15px;
+    border: 2px solid rgba(194, 155, 98, 0.3);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.timeline-img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 25px rgba(194, 155, 98, 0.2);
+}
+
+/* 3. Mini-Game Section */
+.game-section {
+    padding: 5rem 2rem 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.game-card {
+    background-color: var(--card-bg);
+    padding: 4rem 2rem;
+    border-radius: 25px;
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(194, 155, 98, 0.15);
+    backdrop-filter: blur(10px);
+}
+
+.game-card h2 {
+    color: var(--accent-gold);
+    margin-bottom: 3rem;
+    font-size: 2rem;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    position: relative;
+    min-height: 60px;
+}
+
+.btn {
+    padding: 12px 35px;
+    font-size: 1.25rem;
+    font-family: var(--font-body);
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.yes-btn {
+    background-color: var(--accent-gold);
+    color: #ffffff;
+    box-shadow: 0 5px 15px rgba(194, 155, 98, 0.3);
+}
+
+.yes-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(194, 155, 98, 0.5);
+}
+
+.no-btn {
+    background-color: #f0f0f0;
+    color: var(--text-main);
+    border: 1px solid #ddd;
+}
+
+/* التجاوب مع شاشات الهواتف (Responsive) */
+@media screen and (max-width: 768px) {
+    .title { font-size: 2.2rem; }
+    .subtitle { font-size: 1.6rem; }
+    
+    .timeline::after {
+        left: 20px;
+        right: auto;
+        transform: none;
+        display: block;
+    }
+    
+    .timeline-item {
+        width: 100%;
+        padding-left: 60px; /* زودت المسافة عشان الحلقات تبان كويس */
+        padding-right: 15px;
+        margin-bottom: 35px;
+    }
+    
+    .timeline-item.right { left: 0; }
+    
+    .timeline-item.left::after, .timeline-item.right::after {
+        left: 8px; /* ظبطت السنتر بتاع الدايرة مع الخط بالظبط */
+        right: auto;
+        display: block;
+    }
+
+    .timeline-item.left .timeline-content, .timeline-item.right .timeline-content {
+        border-right: 1px solid rgba(194, 155, 98, 0.15);
+        border-left: 4px solid var(--accent-gold); /* الخط العريض بقى على الشمال */
+        text-align: center;
+        padding: 20px 15px;
+    }
+    
+    .timeline-img {
+        max-height: 250px;
+    }
+    
+    .game-card {
+        padding: 3rem 1.5rem;
+    }
+    
+    .game-card h2 {
+        font-size: 1.8rem;
+    }
+    
+    .btn {
+        padding: 10px 25px;
+        font-size: 1.1rem;
+    }
+}
